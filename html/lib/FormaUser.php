@@ -639,8 +639,9 @@ class FormaUser
                     return $false_public;
                 }
                 // End edit
+            } else {
+                ldap_unbind($ldap_conn);
             }
-            ldap_unbind($ldap_conn);
         } elseif (!$user_manager->password_verify_update($password, $user_info[ACL_INFO_PASS], $user_info[ACL_INFO_IDST])) {
             return false;
         }
