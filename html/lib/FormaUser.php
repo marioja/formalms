@@ -622,7 +622,8 @@ class FormaUser
             if (!($ldap_conn = @ldap_connect(Get::sett('ldap_server'), Get::sett('ldap_port', '389')))) {
                 exit('Could not connect to ldap server');
             }
-
+            ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+            ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
             //bind on server
             $ldap_user = preg_replace('/\$user/', $login, Get::sett('ldap_user_string'));
             if (!(@ldap_bind($ldap_conn, $ldap_user, $password))) {
